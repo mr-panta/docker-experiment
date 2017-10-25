@@ -2,11 +2,11 @@ version: '3.3'
 
 services:
     asset_mapping:
-        build: ./asset_mapping
-        ports:
-            - "28017:28017"
+        build: asset_mapping
 
     asset_mapping_seed:
-        build: ./asset_mapping
+        build: asset_mapping_seed
+        ports:
+            - "28017:28017"
         links:
             - asset_mapping
