@@ -1,8 +1,45 @@
-# Docker Worksheet 
+# Docker Structure
+
+โครงสร้าง Container ที่ต้องการ
 
 ![System structure](images/Docker-Worksheet.jpg)
 
-## Example
+Container ด้านบน เป็นโครงสร้างสำหรับโปรแกรมค้นหาข้อมูลผู้ใช้งาน โดยดัดแปลงและเพิ่มเติมจากที่ได้บรรยายไปในชั้นเรียน 
+ซึ่งการทำงานของโปรแกรมนี้คือ 
+
+1. จะเริ่มต้นใช้งานจะจาก _ClientApplication_ ภายในส่วน *Inspection* ด้วยการส่งชื่อ *username* ที่ต้องการค้นหาให้กับ _UserAccountService_ ผ่านการร้องขอข้อมูลแบบ GET ของโปรโตคอล HTTP ซึ่งอยู่ใน *In-class Structure* 
+1. *In-class Structure* จะเป็นโครงสร้างเช่่นเดียวกันกับที่บรรยายในชั้นเรียน โดยที่ _UserAcountService_ จะรับข้อมูล *username* เพื่อค้นหาหมายเลขโทรศัพท์ของ *username* ดังที่ระบุ จากฐานข้อมูล MySQL ภายใน _UserDataServer_ 
+1. _UserDataServer_ นั้นได้เตรียมข้อมูลตั้งต้นไว้ภายในโฟลเดอร์ **user_data** แล้วเรียบร้อย
+1. นอกจากพฤติกรรมปกติตามที่บรรยายในชั้นเรียนแล้ว ได้ปรับเพิ่มให้ _UserAccountService_ นั้นส่ง *username* ไปยัง _AssetService_ เพื่อนำไปค้นหาข้อมูลรูปภาพที่ตรงกันกับ *username* ที่ต้อง 
+
+ทำเฉพาะ **In-class Structure** และ **Addition Structure** 
+
+## ผลลัพธ์ที่ต้องการ
+
+**ข้อมูลนำเข้า** ชื่อผู้ใช้งาน เช่น **alice**, **bob** หรือ **carol**
+
+**ข้อมูลส่งออก** ชื่อผู้ใช้งาน, หมายเลขโทรศัพท์, url ที่อยู่ในรูปของ JSON 
+
+## ตัวอย่าง
+
+### ข้อมูลนำเข้า
+ในกรณีที map port 80 จาก _UserAccountService_ มายัง port 80 ของเครื่อง Host OS
+```bash
+$ curl -L http://localhost/?username=alice
+```
+
+### ข้อมูลส่งออก
+```json
+{
+  "username": "alice",
+  "phone_number": "1234567890",
+  "profile_image": "https://picsum.photos/1000"
+}
+```
+
+## Asset Mapping Database
+
+เพื่ออำนวยความสะดวก ได้จัดเตรียม AssetMappingDatabase พร้อมทั้งเพิ่มข้อมูลด้านในไว้ให้แล้วเรียบร้อย เมื่อ Build container ด้วยการเรียกใช้งานคำสั่งด้านล่างจะได้ข้อมูลตามด้านล่าง
 
 ```bash
 $ docker-compose build
