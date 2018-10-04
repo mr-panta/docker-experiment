@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const userRouter = require('./api/user');
 
-mongoose.connect(`mongodb://${process.env.MONGO_HOST}:28017/user`, { useNewUrlParser: true }, err => {
+mongoose.connect(`mongodb://${process.env.MONGO_HOST}:27017/user`, { useNewUrlParser: true }, err => {
   if (err) {
     console.warn(err);
   } else {

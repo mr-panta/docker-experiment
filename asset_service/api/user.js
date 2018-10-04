@@ -1,15 +1,17 @@
 const User = require('../model/user');
 
 const router = (app) => {
-  app.get('/', async (req, res) => {
-    const { username } = req.query;
-    const user = await User.findOne({ uname: username });
-    if (user) {
-      const { profile_image } = user;
-      res.send({ profile_image });
-    } else {
+  app.get('/', (req, res) => {
+    User.findOne({ uname: req.query.username }).then(user => {
+      if (user) {
+        res.send({ profile_image: user.profile_image });
+      } else {
+        res.status(404).send();
+      }
+    }).catch(err => {
+      console.warn(err);
       res.status(404).send();
-    }
+    });
   });
 };
 
