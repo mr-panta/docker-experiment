@@ -10,7 +10,7 @@
 # Generation Time: 2017-10-25 06:05:58 +0000
 # ************************************************************
 
-CREATE DATABASE IF NOT EXSTS ABCompany;
+CREATE DATABASE IF NOT EXISTS ABCompany;
 USE ABCompany;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;

@@ -1,0 +1,18 @@
+{
+  "name": "asset_service",
+  "version": "1.0.0",
+  "description": "asset service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "MONGO_HOST=localhost PORT=8008 nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manussawee Tepakidareekul",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.1.6",
+    "mongoose": "^5.3.1"
+  }
+}
